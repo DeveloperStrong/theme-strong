@@ -8,14 +8,43 @@
     {% if page %}
         <div id="nav-menu">
             <ul class="nav-list">
-                <li><a href="{{page.slug}}" class="title-01 text-color-graydark">
-                    {{page.title}}
+                <li><a href="/" class="text-01 text-color-graydark">
+                    Volver
                 </a></li>
             </ul>
         </div>
     {% else %}
-        <p class="text-01 text-color-graydark">Página no encontrada</p>
+        <h1 class="title-01 text-color-graydark">Página no encontrada</h1>
     {% endif %}
 {% endblock header%}
+
 {% block content %}
+    {% if page %}
+    <section class="article-hero">
+        <div class="center">
+          <figure>
+            <amp-img alt="image"
+              src="{{ DEFAULT_THEME}}/static/images/hero-home.png"
+              width="1078"
+              height="560"
+              layout="responsive">
+            </amp-img>
+          </figure>
+        </div>
+      </section>
+    <section class="article-main-text">
+        <h1 class="title-01 text-color-graydark">{{ page.h1 }}</h1>
+        <p class="lead text-02 text-color-graydark">{{ page.body_text }}</p>
+        {#{% set items = page[0] %}#}
+        {% for i,j in page.get_fields %}
+            <p>{{i}}:{{j}}</p>
+        {% endfor %}
+        {#{% for i,j in page.object_list %}
+            <p>{{i}}:{{j}}</p>
+        {% endfor %}#}
+    </section>
+    
+    {% else %}
+        <h1 class="title-01">Articulos no encontrados</h1>
+    {% endif %}
 {% endblock %}

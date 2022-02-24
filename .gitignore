@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 static/
 output/
 Pipfile
 Pipfile.lock
 __pycache__/
-=======
->>>>>>> f35c83a4a4b0411a1f539fa07b36fa8a8d605c70
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
