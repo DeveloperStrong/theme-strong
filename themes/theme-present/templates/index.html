@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <div id="nav-menu">
+        <ul class="nav-list">            
+            {% if pages%} 
+                {% for i in pages %}
+                    <li>
+                        <a href="pages/{{i.slug}}" class="text-02 text-color-graydark">{{ i.title }}</a>
+                    </li>
+                {% endfor %}
+            {% endif%}
+        </ul>    
+    </div>
+{% endblock header %}
+
+{% block content %}
+{% endblock content %}

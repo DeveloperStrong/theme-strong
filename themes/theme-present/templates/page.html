@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ SITENAME }} {% if page %} - {{page.title}} {% else %} Página no encontrada {% endif %}
+{% endblock title %}
+
+{% block header %} 
+    {% if page %}
+        <div id="nav-menu">
+            <ul class="nav-list">
+                <li><a href="{{page.slug}}" class="title-01 text-color-graydark">
+                    {{page.title}}
+                </a></li>
+            </ul>
+        </div>
+    {% else %}
+        <p class="text-01 text-color-graydark">Página no encontrada</p>
+    {% endif %}
+{% endblock header%}
+{% block content %}
+{% endblock %}
