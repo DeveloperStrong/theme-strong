@@ -24,7 +24,7 @@
         <div class="center">
           <figure>
             <amp-img alt="image"
-              src="{{ DEFAULT_THEME}}/static/images/hero-home.png"
+              src="{{page.product_img_1}}"
               width="1078"
               height="560"
               layout="responsive">
@@ -35,16 +35,35 @@
     <section class="article-main-text">
         <h1 class="title-01 text-color-graydark">{{ page.h1 }}</h1>
         <p class="lead text-02 text-color-graydark">{{ page.body_text }}</p>
-        {#{% set items = page[0] %}#}
-        {% for i,j in page.get_fields %}
-            <p>{{i}}:{{j}}</p>
-        {% endfor %}
-        {#{% for i,j in page.object_list %}
-            <p>{{i}}:{{j}}</p>
-        {% endfor %}#}
     </section>
-    
-    {% else %}
-        <h1 class="title-01">Articulos no encontrados</h1>
+    <section>
+        {# Se crea un bucle con un rango que acaba en GRID_NUMBER acorde a lo que se expecifica en el Pelicanconf.py#}    
+        {% for i in range(1,GRID_NUMBER) %}
+            {# Se crean variables para leer de una page los productos vasados en el indice dentro del rango #}
+            {% set product_img = 'product_img_{}'.format(i) %}
+            {% set product_title = 'product_title_{}'.format(i) %}
+            {% set product_link = 'product_link_{}'.format(i) %}
+            {# Se comprueba que el producto existe y es diferente de 'nan' #}
+            {% if (page[product_img] and page[product_title] and page[product_link]) is defined and (page[product_img] and page[product_title] and page[product_link] ) != 'nan' %}
+            <article class="product small graylight">
+                <figure>
+                    <amp-img alt="image"
+                    src={{ page[product_img] }}
+                    width="560"
+                    height="560"
+                    layout="responsive">
+                    </amp-img>
+                </figure>
+                <div class='box center'>
+                    <h5 class="title-05 ">
+                        <a href="{{page[product_link]}}">{{page[product_title]}}</a>
+                    </h5>
+                </diV>
+                {% else %}
+
+                {% endif %}
+            </article>
+        {% endfor %}
+    </section>    
     {% endif %}
 {% endblock %}

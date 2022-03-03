@@ -1,4 +1,7 @@
 import os
+from pydoc import pager
+from jinja2 import environmentfilter, environment
+import markdown as md
 
 AUTHOR = 'developerstrong'
 SITENAME = 'strongtheme'
@@ -53,3 +56,10 @@ AUTHORS_SAVE_AS = ''
 CATEGORY_SAVE_AS = ''
 CATEGORIES_SAVE_AS = ''
 TAGS_SAVE_AS = ''
+PAGE_SAVE_AS ='pages/{slug}.html'
+
+#PLUGIN_PATHS = ['plugins']
+#PLUGINS = ['simple']
+
+''' Variable en donde se establece la cantidad de posibles valores a renderizar dentro de una page de productos '''
+GRID_NUMBER = 80
