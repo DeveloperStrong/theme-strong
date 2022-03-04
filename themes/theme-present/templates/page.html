@@ -37,33 +37,77 @@
         <p class="lead text-02 text-color-graydark">{{ page.body_text }}</p>
     </section>
     <section>
-        {# Se crea un bucle con un rango que acaba en GRID_NUMBER acorde a lo que se expecifica en el Pelicanconf.py#}    
+        {# Se crea un bucle con un rango que acaba en GRID_NUMBER acorde a lo que se expecifica en el Pelicanconf.py#}
+        {% set rango = range(1,GRID_NUMBER) %}    
         {% for i in range(1,GRID_NUMBER) %}
             {# Se crean variables para leer de una page los productos vasados en el indice dentro del rango #}
             {% set product_img = 'product_img_{}'.format(i) %}
             {% set product_title = 'product_title_{}'.format(i) %}
             {% set product_link = 'product_link_{}'.format(i) %}
+            {% set product_valid = ( page[product_img] and page[product_title] and page[product_link] ) %}
             {# Se comprueba que el producto existe y es diferente de 'nan' #}
-            {% if (page[product_img] and page[product_title] and page[product_link]) is defined and (page[product_img] and page[product_title] and page[product_link] ) != 'nan' %}
+            {% if product_valid is defined and product_valid!= 'nan' %}
             <article class="product small graylight">
                 <figure>
-                    <amp-img alt="image"
-                    src={{ page[product_img] }}
-                    width="560"
-                    height="560"
+                    <amp-img alt="{{page[product_title]}}"
+                    src="{{ page[product_img] }}"
+                    width="100"
+                    height="110"
                     layout="responsive">
                     </amp-img>
                 </figure>
                 <div class='box center'>
-                    <h5 class="title-05 ">
-                        <a href="{{page[product_link]}}">{{page[product_title]}}</a>
-                    </h5>
+                    <a class="link link-01" href="{{ page[product_link] }}"> <h5 class="title-05 "> {{ page[product_title] }} </h5></a>                    
                 </diV>
-                {% else %}
-
-                {% endif %}
             </article>
+            {% endif %}
         {% endfor %}
-    </section>    
+    </section>
+    <section class="faq-home graylight">
+        <div class="center">
+            <h3 class="title-03 text-color-graydark"> {{ page.faq_title}} </h3>
+            <hr>
+            <section>
+                <amp-accordion animate expand-single-section>
+                    {% for fq in rango %}
+                        {% set faq_q = "faq_q_{}".format(fq)%}
+                        {% set faq_a = "faq_a_{}".format(fq)%}
+                        {% if ( page[faq_q] and page[faq_a] ) is defined %}
+                        <section>
+                            <h4 class="title-04 text-color-graydark">{{ page[faq_q] }}</h3>
+                            <div class="">
+                                <p class="text-02">{{ page[faq_a] }} </p>
+                            </div>
+                        </section>                    
+                        {% endif %}    
+                    {% endfor %}
+                </amp-accordion>
+            </section>
+        </div>
+    </section>
+    <section class="last-article graylight">
+        <h2 class="title-02 text-color-graydark"> {{ page.title_cta }} </h2>
+        <div class="center">
+            <div>
+                {% for m in rango %}
+                    {% set text = "text_link_{}".format(m) %}
+                    {% set menu = "menu_link_{}".format(m) %}
+                    {% if ( page[text] and page[menu] ) is defined  %}
+                    <article class="article">
+                        <div class="box graylight">
+                            <h3 class="title-03 text-color-graydark">{{ page[text] }} <a class="link link01 text-02" href="{{ page[menu] }}">Leer Más</a></h3>
+                            
+                        </div>
+                    </article>
+                    {% endif %}    
+                    
+                {% endfor %}
+            </div>
+            <div >
+                <p class="text-02">{{ page.description_cta }}</p>                
+                <a class="button cta01 text-02" href="{{ page.description_cta_btn_link }}">{{ page.description_cta_btn }}</a>
+            </div>            
+        </div>
+    </section>
     {% endif %}
 {% endblock %}
