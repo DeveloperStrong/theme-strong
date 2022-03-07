@@ -4,11 +4,18 @@
     {{ SITENAME }} {% if page %} - {{page.title}} {% else %} Página no encontrada {% endif %}
 {% endblock title %}
 
+{% block canonical %}
+ {% if page %}
+    <link rel="canonical" href="{{SITEURL}}/{{page.slug}}"> 
+ {% endif %}
+    
+{% endblock %}
+
 {% block header %} 
     {% if page %}
         <div id="nav-menu">
             <ul class="nav-list">
-                <li><a href="/" class="text-01 text-color-graydark">
+                <li><a href="{{FOLDER_SLUG}}/{{slug}}" class="text-01 text-color-graydark">
                     Volver
                 </a></li>
             </ul>
@@ -36,7 +43,7 @@
         <h1 class="title-01 text-color-graydark">{{ page.h1 }}</h1>
         <p class="lead text-02 text-color-graydark">{{ page.body_text }}</p>
     </section>
-    <section>
+    <section class="right">
         {# Se crea un bucle con un rango que acaba en GRID_NUMBER acorde a lo que se expecifica en el Pelicanconf.py#}
         {% set rango = range(1,GRID_NUMBER) %}    
         {% for i in range(1,GRID_NUMBER) %}

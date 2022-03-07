@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
+{% block canonical %}
+    <link rel="canonical" href="{{SITEURL}}">    
+{% endblock %}
+
 {% block header %}
     <div id="nav-menu">
         <ul class="nav-list">            
             {% if pages%} 
                 {% for i in pages %}
                     <li>
-                        <a href="pages/{{i.slug}}" class="text-02 text-color-graydark">{{ i.title }}</a>
+                        <a href="{{SITEURL}}/{{i.slug}}" class="text-02 text-color-graydark">{{ i.title }}</a>
                     </li>
                 {% endfor %}
             {% endif%}

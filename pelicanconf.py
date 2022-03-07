@@ -1,11 +1,8 @@
 import os
-from pydoc import pager
-from jinja2 import environmentfilter, environment
-import markdown as md
 
 AUTHOR = 'developerstrong'
 SITENAME = 'strongtheme'
-SITEURL = 'theme-present'
+SITEURL = 'https://www.theme-present.com/a/p'
 TITLE = 'Theme Strong'
 
 PATH = 'content'
@@ -48,18 +45,40 @@ THEME_STATIC_PATHS = ['static',]
 DISPLAY_PAGES_ON_MENU = True
 
 # Controla los templates que se renderizan y terminan en el directorio output
-DIRECT_TEMPLATES = ['index','page']
+DIRECT_TEMPLATES = ['index','page','category','categories']
 
 ARCHIVES_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''
-CATEGORY_SAVE_AS = ''
-CATEGORIES_SAVE_AS = ''
+CATEGORY_SAVE_AS = 'cat/{slug}.html'
+CATEGORIES_SAVE_AS = 'categories.html'
 TAGS_SAVE_AS = ''
-PAGE_SAVE_AS ='pages/{slug}.html'
+PAGE_SAVE_AS = '{slug}.html'
 
-#PLUGIN_PATHS = ['plugins']
-#PLUGINS = ['simple']
+
+
+# Como son guardadas las urls dentro del output  
+PAGE_URL = '{slug}.html'
+CATEGORY_URL = 'cat/{slug}'
+CATEGORIES_URL = 'categories'
+
+PLUGIN_PATHS = ['plugins']
+PLUGINS = ['sitemap']
 
 ''' Variable en donde se establece la cantidad de posibles valores a renderizar dentro de una page de productos '''
 GRID_NUMBER = 80
+
+SITEMAP = {
+    "exclude":['{slug}.html', 'cat/{slug}', 'cats/{slug}'],
+    "format": "xml",
+    "priorities": {
+        "articles": 0.5,
+        "indexes": 0.5,
+        "pages": 0.5
+    },
+    "changefreqs": {
+        "articles": "monthly",
+        "indexes": "daily",
+        "pages": "monthly"
+    }
+}
