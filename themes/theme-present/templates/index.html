@@ -10,8 +10,12 @@
             {% if pages%} 
                 {% for i in pages %}
                     <li>
-                        <a href="{{SITEURL}}/{{i.slug}}" class="text-02 text-color-graydark">{{ i.title }}</a>
+                        <a href="{{SITEURL}}/pages/{{i.slug}}" class="text-02 text-color-graydark">{{ i.title }}</a>
                     </li>
+                    
+                    {#{% for j in i.tags %}
+                    <p>{{j}}</p><br>
+                    {% endfor %}#}
                 {% endfor %}
             {% endif%}
         </ul>    
@@ -19,4 +23,24 @@
 {% endblock header %}
 
 {% block content %}
+{{page_name}}
+
+{% if pages %}
+<section class="categories">
+    <div class="center">
+{% for page in pages[:3] %}
+        <div class="category">
+            <figure>
+                <amp-img alt="image" src="{{ page.product_img_1 }}" width="528" height="521" layout="responsive"></amp-img>
+                <div class="caption-category">
+                    <h5 class="title-05 text-color-white">{{ page.product_title_1 }}</h5>
+                    <a class="link link02 text-02" href="{{page.product_link_1}}">Ver en la Página</a>
+                </div>
+            </figure>
+        </div>    
+{% endfor %}
+    </div>
+</section>    
+{% endif %}
+
 {% endblock content %}

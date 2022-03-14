@@ -45,22 +45,22 @@ THEME_STATIC_PATHS = ['static',]
 DISPLAY_PAGES_ON_MENU = True
 
 # Controla los templates que se renderizan y terminan en el directorio output
-DIRECT_TEMPLATES = ['index','page','category','categories']
+DIRECT_TEMPLATES = ['index','page','category','categories', 'tag', 'tags']
 
 ARCHIVES_SAVE_AS = ''
 AUTHOR_SAVE_AS = ''
 AUTHORS_SAVE_AS = ''
 CATEGORY_SAVE_AS = 'cat/{slug}.html'
 CATEGORIES_SAVE_AS = 'categories.html'
-TAGS_SAVE_AS = ''
-PAGE_SAVE_AS = '{slug}.html'
-
-
+TAGS_SAVE_AS = 'tags.html'
+TAG_SAVE_AS = 'tag/{slug}.html'
+PAGE_SAVE_AS = 'pages/{slug}.html'
 
 # Como son guardadas las urls dentro del output  
 PAGE_URL = '{slug}.html'
-CATEGORY_URL = 'cat/{slug}'
-CATEGORIES_URL = 'categories'
+CATEGORY_URL = 'cat/{slug}.html'
+CATEGORIES_URL = 'categories.html'
+TAG_URL = 'tag/{slug}.html'
 
 PLUGIN_PATHS = ['plugins']
 PLUGINS = ['sitemap']
@@ -69,7 +69,7 @@ PLUGINS = ['sitemap']
 GRID_NUMBER = 80
 
 SITEMAP = {
-    "exclude":['{slug}.html', 'cat/{slug}', 'cats/{slug}'],
+    "exclude":['{slug}.html', 'cat/{slug}', 'cats/{slug}','tag/{slug}'],
     "format": "xml",
     "priorities": {
         "articles": 0.5,
@@ -82,3 +82,5 @@ SITEMAP = {
         "pages": "monthly"
     }
 }
+
+print('No se que pasa con las categorias')

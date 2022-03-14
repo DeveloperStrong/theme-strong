@@ -4,8 +4,18 @@
  {{SITENAME}} - categorias
 {% endblock %}
 
-{% block content %}
+{% block canonical %} 
+<link rel="canonical" href="{{SITEURL}}/categories"> 
+{% endblock %}
 
+{% block content %}
+    {{categories.slug}}
     <h1 class="title-01">{{SITENAME}} - Categorias</h1>
-    
+
+    <ul>
+        {% for cat, articles in categories|sort %}
+        <li><a href="{{SITEURL}}/{{cat.url}}">{{cat}}</a>{{articles|count}}</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

@@ -15,10 +15,14 @@
     {% if page %}
         <div id="nav-menu">
             <ul class="nav-list">
-                <li><a href="{{FOLDER_SLUG}}/{{slug}}" class="text-01 text-color-graydark">
+                <li><a href="/" class="text-01 text-color-graydark">
                     Volver
                 </a></li>
             </ul>
+            <a href="{{SITEURL}}/cat/{{page.slug}}.html">{{ page.category }}</a>
+            <p>
+                {{page.name}}
+            </p>
         </div>
     {% else %}
         <h1 class="title-01 text-color-graydark">Página no encontrada</h1>
@@ -54,18 +58,13 @@
             {% set product_valid = ( page[product_img] and page[product_title] and page[product_link] ) %}
             {# Se comprueba que el producto existe y es diferente de 'nan' #}
             {% if product_valid is defined and product_valid!= 'nan' %}
-            <article class="product small graylight">
-                <figure>
-                    <amp-img alt="{{page[product_title]}}"
-                    src="{{ page[product_img] }}"
-                    width="100"
-                    height="110"
-                    layout="responsive">
-                    </amp-img>
-                </figure>
-                <div class='box center'>
-                    <a class="link link-01" href="{{ page[product_link] }}"> <h5 class="title-05 "> {{ page[product_title] }} </h5></a>                    
-                </diV>
+            <article class="category small graylight">             
+                <amp-img alt="{{page[product_title]}}" src="{{ page[product_img] }}" width="100" height="110" layout="responsive"></amp-img>
+               
+                <div class="caption-category">
+                    <p class="title-05 text-color-white">{{ page[product_title] }} </p>
+                    <a href="{{ page[product_link] }}" class="link link02"> Ver Más </a>
+                  </div>
             </article>
             {% endif %}
         {% endfor %}
@@ -116,5 +115,58 @@
             </div>            
         </div>
     </section>
+
+    <section class="info-text-02 graylight">
+        <div class="center">
+            {% for i in rango[:3] %}
+            {% set product_img = 'product_img_{}'.format(i) %}
+            {% set product_title = 'product_title_{}'.format(i) %}
+            {% set product_link = 'product_link_{}'.format(i) %}
+            {% set product_valid = ( page[product_img] and page[product_title] and page[product_link] ) %}
+            {% if product_valid is defined and product_valid!= 'nan' %} 
+                <article class="info">
+                    <h5 class="title-05"> {{page[product_title]}} </h5>
+                    <amp-img alt="image" src="{{ page[product_img] }}" width="528" height="521" layout="responsive"></amp-img>
+                    <a class="link link01 text-02" href="{{page[product_link]}}">Ver en la Página</a>
+                </article>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="text-03">
+        <div>
+        {% if pages %}
+        <ul style="list-style-type: none">
+        {% for item in pages %}
+        {%if item != page %}
+            <li><a href="{{SITEURL}}/pages/{{item.slug}}.html" class="link link01">{{item.title}}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        </ul>
+        </div>
+    </section>
+
+    <script type="application/ld+json">
+        {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        {% for fq in range(1,4) %}
+        {% set faq_q = "faq_q_{}".format(fq) %}
+        {% set faq_a = "faq_a_{}".format(fq) %}
+        {% if ( page[faq_q] and page[faq_a] ) is defined %}
+        "mainEntity": [{
+            "@type": "Question",
+            "name": "{{ page[faq_q] }}",
+            "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "{{ page[faq_a] }}"
+            }
+        },
+        {% endif %}
+        {% endfor %}
+        ]}
+    </script>
     {% endif %}
 {% endblock %}
