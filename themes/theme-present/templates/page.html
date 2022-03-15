@@ -138,7 +138,7 @@
         <div>
         {% if pages %}
         <ul style="list-style-type: none">
-        {% for item in pages %}
+        {% for item in pages[:4] %}
         {%if item != page %}
             <li><a href="{{SITEURL}}/pages/{{item.slug}}.html" class="link link01">{{item.title}}</a></li>
         {% endif %}
